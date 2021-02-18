@@ -47,34 +47,66 @@ const YearStat = ({ year, onClick }) => {
   const avgHeartRate = (heartRate / (runs.length - heartRateNullCount)).toFixed(
     0
   );
-  return (
-    <div
-      style={{ cursor: 'pointer' }}
-      onClick={() => onClick(year)}
-      {...eventHandlers}
-    >
-      <section>
-        <Stat value={year} description=" Journey" />
-        <Stat value={runs.length} description=" Runs" />
-        <Stat value={sumDistance} description=" KM" />
-        <Stat value={avgPace} description=" Avg Pace" />
-        <Stat
-          value={`${streak} day`}
-          description=" Streak"
-          className="mb0 pb0"
-        />
-        {hasHeartRate && (
-          <Stat value={avgHeartRate} description=" Avg Heart Rate" />
+  if(year === 2021){
+    return (
+      <div
+        style={{ cursor: 'pointer' }}
+        onClick={() => onClick(year)}
+        {...eventHandlers}
+      >
+        <section>
+          <Stat value={year} description=" Journey" />
+          <Stat value={runs.length} description=" Runs" />
+          <Stat value={sumDistance} description=" KM Done" />
+          <Stat value={1000 - sumDistance} description=" KM Left" />
+          <Stat value={avgPace} description=" Avg Pace" />
+          <Stat
+            value={`${streak} day`}
+            description=" Streak"
+            className="mb0 pb0"
+          />
+          {hasHeartRate && (
+            <Stat value={avgHeartRate} description=" Avg Heart Rate" />
+          )}
+        </section>
+        {hovered && (
+          <React.Suspense fallback="loading...">
+            <YearSVG className={styles.yearSVG} />
+          </React.Suspense>
         )}
-      </section>
-      {hovered && (
-        <React.Suspense fallback="loading...">
-          <YearSVG className={styles.yearSVG} />
-        </React.Suspense>
-      )}
-      <hr color="red" />
-    </div>
-  );
+        <hr color="red" />
+      </div>
+    );
+  }else{
+    return (
+      <div
+        style={{ cursor: 'pointer' }}
+        onClick={() => onClick(year)}
+        {...eventHandlers}
+      >
+        <section>
+          <Stat value={year} description=" Journey" />
+          <Stat value={runs.length} description=" Runs" />
+          <Stat value={sumDistance} description=" KM" />
+          <Stat value={avgPace} description=" Avg Pace" />
+          <Stat
+            value={`${streak} day`}
+            description=" Streak"
+            className="mb0 pb0"
+          />
+          {hasHeartRate && (
+            <Stat value={avgHeartRate} description=" Avg Heart Rate" />
+          )}
+        </section>
+        {hovered && (
+          <React.Suspense fallback="loading...">
+            <YearSVG className={styles.yearSVG} />
+          </React.Suspense>
+        )}
+        <hr color="red" />
+      </div>
+    );
+  }
 };
 
 export default YearStat;
