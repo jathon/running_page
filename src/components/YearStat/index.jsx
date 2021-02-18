@@ -47,7 +47,7 @@ const YearStat = ({ year, onClick }) => {
   const avgHeartRate = (heartRate / (runs.length - heartRateNullCount)).toFixed(
     0
   );
-  if(year === 2021){
+  if(year === '2021'){
     return (
       <div
         style={{ cursor: 'pointer' }}
